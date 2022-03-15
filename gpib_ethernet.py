@@ -22,7 +22,7 @@ def connect():
     try:
         s.connect((HOST,PORT))
         s.send(b'++savecfg 0\n')
-        s.send(b'++addr 23\n')
+        s.send(b'++addr 28\n')
         s.send(b'++auto 0\n')
         s.send(b'++ver\n')
         try:
