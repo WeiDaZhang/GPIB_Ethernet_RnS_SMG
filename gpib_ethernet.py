@@ -4,7 +4,6 @@ Performed on 2022 Mar 15
 """
 
 import socket
-from socket import AF_INET, SOCK_DGRAM
 import time
 import math
 import os
@@ -18,7 +17,7 @@ PORT = 1234
 
 def connect():
 
-    s = socket.socket(AF_INET, SOCK_DGRAM)
+    s = socket.socket()
     s.settimeout(5)
     try:
         s.connect((HOST,PORT))
@@ -32,11 +31,11 @@ def connect():
             s.send(b'++read EOI\n')
             try:
                 print(s.recv(1024))
-            except socket.timeout:
+            except socket.Timeouterror:
                 print('Reading GPIB Instrument Version Failed!')
-        except socket.timeout:
+        except socket.Timeouterror:
             print('Reading GPIB-ETHERNET Module Version Failed!')
-    except socket.timeout:
+    except socket.Timeouterror:
         print('GPIB-ETHERNET Module Network Error!')
 
     # rm = pyvisa.ResourceManager()
