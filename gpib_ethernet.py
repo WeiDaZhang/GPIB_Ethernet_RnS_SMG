@@ -4,6 +4,7 @@ Performed on 2022 Mar 15
 """
 
 import socket
+from socket import AF_INET, SOCK_DGRAM
 import time
 import math
 import os
