@@ -18,7 +18,7 @@ PORT = 1234
 
 def connect():
 
-    s = socket.socket()
+    s = socket.socket(AF_INET, SOCK_DGRAM)
     s.settimeout(5)
     try:
         s.connect((HOST,PORT))
@@ -32,11 +32,11 @@ def connect():
             s.send(b'++read EOI\n')
             try:
                 print(s.recv(1024))
-            except socket.Timeouterror:
+            except socket.timeout:
                 print('Reading GPIB Instrument Version Failed!')
-        except socket.Timeouterror:
+        except socket.timeout:
             print('Reading GPIB-ETHERNET Module Version Failed!')
-    except socket.Timeouterror:
+    except socket.timeout:
         print('GPIB-ETHERNET Module Network Error!')
 
     # rm = pyvisa.ResourceManager()
