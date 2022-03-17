@@ -41,11 +41,11 @@ def connect():
                         print(s.recv(1024))
                         s.send(b'LEVEL:OFF\n')
                         s.send(b'RF:START 10KHZ\n')
-                        s.send(b'RF:STOP 62MHZ\n')
-                        s.send(b'RF:STEP 200KHZ\n')
-                        s.send(b'TIME:RF_SWP 50MS\n')
-                        s.send(b'SWP:AUTO\n')
+                        s.send(b'RF:STOP 150MHZ\n')
+                        s.send(b'RF:STEP 400KHZ\n')
+                        s.send(b'TIME:RF_SWP 40MS\n')
                         s.send(b'LEVEL:ON\n')
+                        s.send(b'SWP:SINGLE\n')
                     except skt.timeout:
                         print('Reading RF Output LEVEL Failed!')
                 except skt.timeout:
