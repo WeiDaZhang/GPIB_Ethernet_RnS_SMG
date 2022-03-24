@@ -7,7 +7,7 @@ int gpib_config()
 {
 	int socket_desc;
 	struct sockaddr_in server;
-	char *server_addr = "127.0.0.1";
+	char *server_addr = "192.168.1.32";
 	char *message , server_reply[2000];
 
 	//Create socket
@@ -43,16 +43,21 @@ int gpib_config()
 	//Request GPIB Instrument Version
 	message = "*IDN?\n";
 	send(socket_desc , message , strlen(message) , 0);
+	message = "++read EOI\n";
+	send(socket_desc, message, strlen(message), 0);
 	if( recv(socket_desc, server_reply , 1024 , 0) < 0)
 	{
 		puts("Reading GPIB Instrument Version Failed!");
 		return 1;
 	}
+	puts(message);
 	puts(server_reply);
 
 	//Request RF Frequency
 	message = "RF?\n";
 	send(socket_desc , message , strlen(message) , 0);
+	message = "++read EOI\n";
+	send(socket_desc, message, strlen(message), 0);
 	if( recv(socket_desc, server_reply , 1024 , 0) < 0)
 	{
 		puts("Inquiring RF parameter Failed!");
@@ -63,6 +68,8 @@ int gpib_config()
 	//Request RF Level
 	message = "LEVEL?\n";
 	send(socket_desc , message , strlen(message) , 0);
+	message = "++read EOI\n";
+	send(socket_desc, message, strlen(message), 0);
 	if( recv(socket_desc, server_reply , 1024 , 0) < 0)
 	{
 		puts("Reading RF Output LEVEL Failed!");
